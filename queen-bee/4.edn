@@ -1,0 +1,46 @@
+{:neuron 4
+ :purpose "Structures - datatypes, attributes, valuetypes"
+ :created #inst "2025-09-15T03:00:00.000-00:00"
+ 
+ :datatype-evolution
+ {:from "thing/id"
+  :to "datatype/id"
+  :why "More concrete, works better on weaker models"
+  :pat-wisdom "The word 'thing' is too abstract for simple models"
+  :fi-agrees "Yes - 'datatype' immediately conveys structure and type"}
+ 
+ :core-datatypes
+ [:datatype/neuron 
+  :datatype/instance 
+  :datatype/component 
+  :datatype/entry
+  :datatype/event 
+  :datatype/fact 
+  :datatype/transform 
+  :datatype/work]
+ 
+ :universal-attributes
+ {:instance/id "UUID - universal unique identifier"
+  :datatype/id "Qualified keyword - what type of data (:datatype/neuron)"
+  :inside-datatype-unique/id "Specific item (:neuron/torch, :neuron/identity)"
+  :db/id "Storage system's internal ID"}
+ 
+ :valuetypes
+ {:vt/uuid "java.util.UUID"
+  :vt/string "String"
+  :vt/long "Long integer"
+  :vt/double "Double precision float"
+  :vt/boolean "Boolean true/false"
+  :vt/instant "java.time.Instant"
+  :vt/keyword "Clojure keyword"
+  :vt/qkw "Qualified keyword"
+  :vt/ref "Reference to another entity"
+  :vt/any "Any Clojure value"}
+ 
+ :schema-generation
+ {:from-attributes "Attributes define schema"
+  :to-datomic "Generate Datomic schema from attributes"
+  :to-sql "Generate SQL DDL from attributes"
+  :pattern "Data drives structure, not code"}
+ 
+ :timestamp #inst "2025-09-15T03:00:00.000-00:00"}

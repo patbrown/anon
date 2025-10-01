@@ -1,0 +1,3 @@
+* We should rename and start using neurons like, denote
+https://protesilaos.com/emacs/denote
+

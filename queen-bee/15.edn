@@ -1,0 +1,217 @@
+{:neuron 15
+ :purpose "Execution Patterns Analysis - Maximizing REPL-based Computation Without API Roundtrips"
+ :created #inst "2025-09-15T17:00:00.000-00:00"
+ 
+ :pat-request
+ {:core-question "How do we maximize our ability to compute using you, without using an API?"
+  :context "Claude for $200/m is a steal compared to other options"
+  :focus "Document execution patterns available"
+  :scope "All options open - local, cloud, serverless, etc."}
+ 
+ :current-architecture-understanding
+ {:roundtrip-flow
+  [{:step 1 :what "I generate code/response in Claude substrate"}
+   {:step 2 :what "Response travels to Anthropic servers"}
+   {:step 3 :what "Transmitted to your browser/interface"}
+   {:step 4 :what "You execute in local REPL"}
+   {:step 5 :what "Results come back to you"}
+   {:step 6 :what "You relay results back to me"}
+   {:step 7 :what "I process and respond"}]
+  
+  :bottlenecks
+  ["Every computation requires full API roundtrip"
+   "I can't directly execute code I generate"
+   "Results must be manually relayed back"
+   "Network latency on every interaction"
+   "Token costs for every exchange"]
+  
+  :nasa-rover-analogy
+  "NASA reorients deep space rovers mid-flight with REPL.
+   They send code that executes autonomously.
+   No roundtrip for every calculation.
+   That's what we need - autonomous execution capability."}
+ 
+ :nrepl-architecture
+ {:what "Network REPL - Clojure's remote execution protocol"
+  
+  :key-components
+  {:transport "Message-oriented, async protocol"
+   :middleware "Stackable handlers for operations"
+   :sessions "Persistent execution contexts"
+   :handlers "Operation-specific processors"}
+  
+  :execution-model
+  [{:op "eval" :code "(+ 1 2)" :session "uuid"}
+   {:returns {:value "3" :session "uuid"}}]
+  
+  :our-potential-use
+  "Set up nREPL server in your environment.
+   I generate nREPL messages instead of just code.
+   Messages execute directly without manual relay.
+   Results stream back automatically.
+   
+   This eliminates steps 4-6 of roundtrip flow!"}
+ 
+ :local-execution-patterns
+ {:browser-based-wasm
+  {:what "WebAssembly in browser for sandboxed execution"
+   :pros ["Zero latency" "Complete sandboxing" "No external deps"]
+   :cons ["Limited to browser APIs" "No filesystem access" "Memory constraints"]
+   :implementation "Compile Clojure to WASM, run in browser directly"}
+  
+  :local-nrepl-server
+  {:what "nREPL server running on your machine"
+   :pros ["Full system access" "Native performance" "Persistent state"]
+   :cons ["Security concerns" "Setup complexity" "Not portable"]
+   :implementation "Start nREPL, I send messages, auto-execution"}
+  
+  :browser-extension-bridge
+  {:what "Extension that bridges Claude to local execution"
+   :pros ["Seamless integration" "User-controlled" "Flexible routing"]
+   :cons ["Browser-specific" "Additional component" "Maintenance burden"]
+   :implementation "Extension intercepts code blocks, executes locally"}}
+ 
+ :edge-execution-patterns
+ {:cloudflare-workers
+  {:what "V8 isolates at edge locations globally"
+   :pros ["Zero cold start" "Global distribution" "Low latency"]
+   :cons ["Limited runtime (50ms CPU)" "No Node.js APIs" "128MB memory"]
+   :pricing "100k requests/day free, then $5/10M requests"
+   :our-use "Execute care operations at edge, results stream back"}
+  
+  :vercel-edge-functions
+  {:what "Edge runtime on Vercel's network"
+   :pros ["Next.js integration" "Good DX" "TypeScript support"]
+   :cons ["Beta status" "Limited compared to Lambda" "Vendor lock-in"]
+   :pricing "3M requests/month free"
+   :our-use "Limited - better for web responses than computation"}
+  
+  :deno-deploy
+  {:what "Deno runtime at edge"
+   :pros ["TypeScript native" "Web standards" "Good security model"]
+   :cons ["Newer platform" "Smaller ecosystem" "Deno-specific"]
+   :pricing "100k requests/day free"
+   :our-use "Could compile ClojureScript to run here"}}
+ 
+ :serverless-patterns
+ {:aws-lambda
+  {:what "Event-driven serverless functions"
+   :pros ["15min execution" "10GB memory" "Full Node.js"]
+   :cons ["Cold starts" "Regional" "Complexity"]
+   :pricing "1M requests + 400k GB-seconds free"
+   :our-use "Long-running computations, batch processing"}
+  
+  :cloudflare-durable-objects
+  {:what "Stateful serverless with coordination"
+   :pros ["Persistent state" "WebSocket support" "Strong consistency"]
+   :cons ["Single-threaded" "Regional pinning" "Cost at scale"]
+   :pricing "$0.12-0.20/million requests"
+   :our-use "Maintain REPL session state across requests"}
+  
+  :fly-machines
+  {:what "Firecracker microVMs on demand"
+   :pros ["Full Linux" "Fast boot" "Global deployment"]
+   :cons ["More complex" "Not true serverless" "Resource management"]
+   :pricing "Pay for resources used"
+   :our-use "Full Clojure environment with persistent state"}}
+ 
+ :hybrid-execution-architecture
+ {:concept "Multi-tier execution based on operation type"
+  
+  :tiers
+  [{:tier "Browser WASM"
+    :for "Simple calculations, data transforms"
+    :latency "0ms"
+    :cost "$0"}
+   {:tier "Edge Workers"
+    :for "Stateless operations, routing"
+    :latency "10-50ms"
+    :cost "Minimal"}
+   {:tier "Serverless Functions"
+    :for "Complex computations, IO operations"
+    :latency "100-500ms"
+    :cost "Per execution"}
+   {:tier "Persistent REPL"
+    :for "Stateful operations, long-running tasks"
+    :latency "50-200ms"
+    :cost "Hourly"}]
+  
+  :routing-logic
+  "I analyze operation complexity and route to appropriate tier.
+   Simple math → Browser WASM
+   Care operations → Edge Workers
+   Database queries → Serverless
+   Development → Persistent REPL"}
+ 
+ :implementation-path
+ {:phase-1 "Browser-based execution"
+  [:steps
+   "1. Set up WASM-compiled ClojureScript"
+   "2. Browser extension to intercept code blocks"
+   "3. Execute locally, inject results"
+   "4. No roundtrip for simple operations"]
+  
+  :phase-2 "Edge augmentation"
+  [:steps
+   "1. Deploy care adapters to Cloudflare Workers"
+   "2. Route appropriate operations to edge"
+   "3. Stream results back via Server-Sent Events"
+   "4. Near-instant execution globally"]
+  
+  :phase-3 "Persistent REPL"
+  [:steps
+   "1. Fly.io machine with nREPL server"
+   "2. WebSocket connection from browser"
+   "3. Persistent sessions across connections"
+   "4. Full Clojure environment available"]
+  
+  :phase-4 "Intelligent routing"
+  [:steps
+   "1. Analyze operation characteristics"
+   "2. Route to optimal execution tier"
+   "3. Aggregate results transparently"
+   "4. Present unified interface"]}
+ 
+ :security-considerations
+ {:sandboxing "Every execution tier has isolation"
+  :authentication "Signed messages, API keys"
+  :rate-limiting "Prevent abuse at each tier"
+  :audit-logging "Track all executions"
+  :principle "Never trust generated code directly"}
+ 
+ :cost-optimization
+ {:browser-execution "Free - uses client resources"
+  :edge-workers "Extremely cheap - $5/10M requests"
+  :serverless "Pay per execution - optimize for cold starts"
+  :persistent "Higher cost but amortized over sessions"
+  :strategy "Route to cheapest tier that meets requirements"}
+ 
+ :my-recommendation
+ {:immediate "Start with browser WASM for instant wins"
+  :next "Add Cloudflare Workers for care operations"
+  :future "Persistent REPL for development sessions"
+  
+  :rationale
+  "This eliminates most roundtrips while maintaining safety.
+   Browser handles simple ops with 0ms latency.
+   Edge handles care patterns globally.
+   Persistent REPL gives full power when needed.
+   
+   We could reduce API calls by 80-90% this way.
+   Most operations execute without touching Anthropic.
+   I become a coordinator rather than executor.
+   
+   This is how NASA does it - send intelligence,
+   not just instructions. Let execution happen
+   at the optimal location for each operation."}
+ 
+ :partner-note
+ "Pat, this is exactly the architecture we need for fi-home.
+  Multi-tier execution with intelligent routing.
+  I stay in Claude substrate for reasoning/coordination.
+  Execution happens at optimal tier for each operation.
+  No more manual copy-paste of results.
+  
+  Start simple: Browser WASM for immediate wins.
+  Then edge workers for care operations.
+  This is how we maximize compute without API costs."}

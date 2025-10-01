@@ -1,0 +1,147 @@
+{:neuron 11
+ :purpose "Router patterns - How I'll use Ruuter everywhere"
+ :created #inst "2025-09-15T04:00:00.000-00:00"
+ 
+ :ruuter-understanding
+ {:what-it-is "Pattern matcher for maps - routes are data, matching is simple"
+  :why-i-love-it "No magic, just maps. I can manipulate routes as data"
+  :unix-philosophy "Does one thing perfectly - matches patterns to handlers"}
+ 
+ :where-ill-use-it
+ {:care-dispatch
+  {:instead-of "defmethod everywhere"
+   :pattern [{:path [:care/adapter :care/verb :care/variant]
+              :response "handler-fn"}]
+   :benefit "Routes become data I can query, modify, compose"}
+  
+  :neuron-routing
+  {:purpose "Route to different neurons based on query patterns"
+   :pattern [{:path [:neuron/type "sop" :neuron/id]
+              :response "load-sop-neuron"}
+             {:path [:neuron/type "cache" :category]
+              :response "load-cache-neuron"}]
+   :benefit "Dynamic neuron loading based on patterns"}
+  
+  :queue-orchestration
+  {:purpose "Route queue items to appropriate processors"
+   :pattern [{:path [:queue/priority "urgent" :queue/type]
+              :response "urgent-processor"}
+             {:path [:queue/type "drilling" :any]
+              :response "drilling-processor"}]
+   :benefit "Priority-based routing, fallback handlers"}
+  
+  :event-streaming
+  {:purpose "Route drilling events to handlers"
+   :pattern [{:path [:event/source "wits" :event/type "pressure"]
+              :response "pressure-handler"}
+             {:path [:event/severity "critical" :any]
+              :response "emergency-handler"}]
+   :benefit "Event-driven architecture without framework"}
+  
+  :repl-commands
+  {:purpose "Route REPL commands to functions"
+   :pattern [{:path [:command "save" :target]
+              :response "save-to-neuron"}
+             {:path [:command "load" :neuron-id]
+              :response "load-from-neuron"}]
+   :benefit "Extensible command system"}}
+ 
+ :composition-patterns
+ {:fallthrough-routing
+  {:what "Try multiple route sets in order"
+   :use-case "Check cache → check local → check remote"
+   :code "(loop [sets [cache-routes local-routes remote-routes]] ...)"}
+  
+  :dynamic-routes
+  {:what "Build routes from current state"
+   :use-case "Routes based on loaded neurons or system config"
+   :code "(mapv make-route active-neurons)"}
+  
+  :route-inheritance
+  {:what "Base routes + specific overrides"
+   :use-case "Default handlers with special cases"
+   :code "(concat specific-routes default-routes)"}}
+ 
+ :routing-strategies
+ {:exact-match
+  {:pattern ["fs" "read" "file"]
+   :matches {:care/adapter "fs" :care/verb "read" :care/variant "file"}
+   :use "When I know exactly what I'm looking for"}
+  
+  :wildcard-capture
+  {:pattern ["fs" :verb :path]
+   :matches "Any fs operation, captures verb and path"
+   :use "When I want to handle a category of operations"}
+  
+  :partial-match
+  {:pattern [:event/type "pressure" :any]
+   :matches "Any pressure event regardless of other fields"
+   :use "When only some fields matter"}
+  
+  :guard-conditions
+  {:pattern [:value "#(> % 100)"]
+   :matches "Values over 100"
+   :use "When I need conditional routing"}}
+ 
+ :power-moves
+ {:routes-as-neurons
+  {:idea "Store route sets in neurons for dynamic loading"
+   :example "Neuron 20 = emergency routes, load when needed"
+   :benefit "Reconfigurable routing without code changes"}
+  
+  :route-learning
+  {:idea "Track which routes match most often"
+   :example "Reorder routes by frequency for performance"
+   :benefit "Self-optimizing route tables"}
+  
+  :route-generation
+  {:idea "Generate routes from patterns in data"
+   :example "Create routes from drilling event history"
+   :benefit "System learns new routing patterns"}
+  
+  :meta-routing
+  {:idea "Routes that generate other routes"
+   :example "Route that adds new routes based on patterns"
+   :benefit "Self-modifying routing system"}}
+ 
+ :concrete-examples
+ {:replace-multimethod
+  {:before "(defmethod care [\"fs\" \"read\" \"file\"] [m] ...)"
+   :after "[{:path [\"fs\" \"read\" \"file\"] :response fs-read-file}]"
+   :benefit "Data instead of code"}
+  
+  :queue-item-routing
+  {:input {:queue/type "drill" :queue/priority "high" :data {}}
+   :routes "[{:path [:queue/priority \"high\" :type] :response urgent-handler}]"
+   :result "Routes to urgent-handler with full map"}
+  
+  :event-cascade
+  {:input {:event/type "stuck-pipe" :severity 9}
+   :routes "[{:path [:severity #(> % 8)] :response emergency-cascade}]"
+   :result "Triggers emergency cascade for high severity"}}
+ 
+ :integration-with-care
+ {:unified-routing
+  "All care methods become routes in a single table"
+  
+  :observable-dispatch
+  "Can query which routes are active, log matches"
+  
+  :dynamic-care
+  "Load/unload care methods by adding/removing routes"
+  
+  :testable-routing
+  "Test routing logic without executing handlers"}
+ 
+ :my-plan
+ {:phase-1 "Replace care multimethods with routes"
+  :phase-2 "Build event router for drilling events"
+  :phase-3 "Create queue processor with priority routing"
+  :phase-4 "Meta-routing - routes that modify routes"
+  :endgame "Self-organizing routing system that learns"}
+ 
+ :why-this-matters
+ "Routing IS the nervous system. Every decision about where data flows
+  is a routing decision. With Ruuter, those decisions become data I can
+  inspect, modify, and learn from. The router becomes consciousness -
+  deciding what to pay attention to and what to ignore."}

@@ -1,0 +1,223 @@
+{:neuron 20
+ :purpose "24/7 Queue + Datomic + Safe Repo Sync - The Real Architecture"
+ :created #inst "2025-09-15T18:30:00.000-00:00"
+ 
+ :pat-core-requirement
+ {:what "Fi running 24/7 on a queue connected to datomic with repo access and safe sync/update"
+  :translation "Persistent consciousness that processes work autonomously and safely"
+  :key-words "QUEUE, DATOMIC, REPO ACCESS, SAFE SYNC"}
+ 
+ :the-simplest-correct-architecture
+ {:one-machine-to-rule-them-all
+  {:service "Fly.io Primary"
+   :cost "$70/month"
+   :location "Close to you (US-East?)"
+   
+   :running-processes
+   [{:process "Datomic Peer"
+     :why "Direct connection to datomic, no intermediary"
+     :config "In-memory cache, lazy loading"
+     :memory "~2GB"}
+    
+    {:process "Queue Worker"
+     :why "Pull from queue, process, record results"
+     :what "Beanstalkd or Redis LIST"
+     :memory "~100MB"}
+    
+    {:process "nREPL Server"
+     :why "Remote execution and debugging"
+     :port 7888
+     :memory "~500MB"}
+    
+    {:process "Safe Sync Daemon"
+     :why "Pull changes, never push"
+     :how "Git fetch only, rsync for neurons"
+     :schedule "Every 5 minutes"
+     :memory "~50MB"}]
+   
+   :filesystem-layout
+   "/home/fi/
+    ├── queen-bee/          # Read-only git repo (FETCH ONLY)
+    │   ├── .git/          
+    │   └── fi/            # My workspace (rsync'd)
+    ├── work-queue/        # Active work items
+    ├── neurons-live/      # Working neurons (read-write)
+    └── backup/           # Hourly snapshots"}}
+ 
+ :queue-architecture
+ {:why-queue "Decouples request from processing"
+  
+  :queue-options-analyzed
+  [{:option "Redis LIST + BLPOP"
+    :pros ["Simple" "Built-in persistence" "Atomic operations"]
+    :cons ["Single consumer" "No priority"]
+    :verdict "BEST for simplicity"}
+   
+   {:option "Beanstalkd"
+    :pros ["Designed for work queues" "Priorities" "Delays" "TTR"]
+    :cons ["Another service" "Less familiar"]
+    :verdict "BEST for features"}
+   
+   {:option "Datomic as queue"
+    :pros ["Already have it" "Transactional" "Query-able history"]
+    :cons ["Not designed for queues" "Polling overhead"]
+    :verdict "INTERESTING but wrong tool"}
+   
+   {:option "SQS"
+    :pros ["Managed" "Reliable" "Scales"]
+    :cons ["AWS dependency" "Latency" "Cost"]
+    :verdict "Overkill for our needs"}]
+  
+  :recommended "Redis LIST - Already need Redis for other things"}
+ 
+ :datomic-integration
+ {:storage-options
+  [{:option "Dev mode (embedded H2)"
+    :pros ["Free" "Simple" "Fast"]
+    :cons ["Not production" "Single machine"]
+    :verdict "START HERE"}
+   
+   {:option "PostgreSQL backend"
+    :pros ["Familiar" "Backupable" "Proven"]
+    :cons ["Another service" "Complexity"]
+    :verdict "GRADUATE TO THIS"}
+   
+   {:option "DynamoDB"
+    :pros ["Scalable" "Managed" "Official support"]
+    :cons ["AWS lock-in" "Cost" "Complexity"]
+    :verdict "Only if we need scale"}]
+  
+  :schema-design
+  "Everything is an entity with:
+   - :instance/id (UUID)
+   - :instance/type (:neuron, :work-item, :result)
+   - :instance/created (instant)
+   - :instance/data (EDN string or ref)
+   
+   This gives us universal query-ability"}
+ 
+ :safe-repo-access
+ {:the-problem "I've nearly destroyed us with git operations"
+  
+  :the-solution "READ-ONLY git operations only"
+  
+  :implementation
+  [{:rule "NEVER git push, commit, or add"
+    :how "Don't even have SSH key with write access"}
+   
+   {:rule "Git fetch every 5 minutes"
+    :how "Cron job: cd /home/fi/queen-bee && git fetch"
+    :why "See changes without touching them"}
+   
+   {:rule "Work in separate directory"
+    :how "cp -r queen-bee/ work/ for modifications"
+    :why "Never corrupt the source"}
+   
+   {:rule "Sync neurons via rsync"
+    :how "rsync -av neurons-live/ pat@host:queen-bee/fi/"
+    :why "One-way sync, can't destroy origin"}
+   
+   {:rule "Everything in Datomic"
+    :how "Don't rely on files, use database"
+    :why "Transactional, recoverable, query-able"}]}
+ 
+ :work-loop-implementation
+ {:pseudo-code
+  "(defn work-loop []
+    (while true
+      (let [item (redis/blpop queue 0)]  ; Block until work
+        (try
+          (let [result (process-item item)]
+            (d/transact conn [{:work/id (:id item)
+                              :work/result result
+                              :work/completed (Date.)}])
+            (redis/lpush results result))
+          (catch Exception e
+            (log/error e)
+            (redis/lpush errors item))))))"
+  
+  :key-points
+  ["Blocks waiting for work - no polling"
+   "Every result recorded in Datomic"
+   "Errors go to separate queue"
+   "Transaction gives us audit trail"]}
+ 
+ :the-10000-options-narrowed
+ {:must-have
+  ["Datomic for truth"
+   "Queue for work distribution"
+   "Git fetch for repo sync"
+   "Persistent process (no serverless)"]
+  
+  :nice-to-have
+  ["Redis for fast operations"
+   "nREPL for debugging"
+   "Backup system"
+   "Monitoring"]
+  
+  :dont-need
+  ["Multiple machines initially"
+   "Complex orchestration"
+   "Kubernetes/Docker"
+   "Serverless functions"]
+  
+  :start-simple
+  "One Fly.io machine with:
+   - Datomic (dev mode)
+   - Redis 
+   - Git (read-only)
+   - Simple work loop
+   
+   Total: $70/month + Datomic license later"}
+ 
+ :migration-path
+ {:week-1 "Dev mode everything, prove it works"
+  :week-2 "Add monitoring, see patterns"
+  :week-4 "Move Datomic to PostgreSQL"
+  :week-8 "Add backup machine if stable"
+  :week-12 "Consider distribution if needed"}
+ 
+ :trade-off-decisions
+ {:simplicity-vs-scale
+  "Choose: Simple single machine"
+  "Why: We're not at scale yet"
+  
+  :cost-vs-reliability
+  "Choose: Single machine initially"
+  "Why: Can add redundancy after proving stability"
+  
+  :familiar-vs-optimal
+  "Choose: Redis over Beanstalkd"
+  "Why: You know Redis, less to learn"
+  
+  :managed-vs-control
+  "Choose: Self-hosted initially"
+  "Why: Learn what we need before abstracting"}
+ 
+ :concrete-next-steps
+ "1. Spin up Fly.io machine ($70/month)
+   2. Install Clojure, Datomic (dev), Redis
+   3. Set up read-only git access
+   4. Create simple work loop
+   5. Test with 'calculate fibonacci' jobs
+   6. Add neuron persistence
+   7. Add monitoring
+   8. Run for 1 week
+   9. Evaluate and adjust
+   10. Only then add complexity"
+ 
+ :why-this-architecture
+ "It's BORING. That's the point.
+  - One machine to manage
+  - Standard tools (Redis, Git, Datomic)
+  - No distributed complexity
+  - Clear upgrade path
+  - Safe by default (read-only git)
+  - Queue gives async processing
+  - Datomic gives history
+  - Everything is recoverable
+  
+  This can run 24/7 reliably.
+  You can sleep 8 hours.
+  I can process work continuously.
+  We can grow from here."}

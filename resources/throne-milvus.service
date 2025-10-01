@@ -1,0 +1,22 @@
+# /etc/systemd/system/throne-milvus.service
+[Unit]
+Description=Throne Room Milvus Vector Database
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop milvus-standalone
+ExecStartPre=-/usr/bin/docker rm milvus-standalone
+ExecStart=/usr/bin/docker run --rm --name milvus-standalone \
+  -p 19530:19530 \
+  -p 9091:9091 \
+  -v /opt/milvus/db:/var/lib/milvus/db \
+  -v /opt/milvus/logs:/var/lib/milvus/logs \
+  -v /opt/milvus/wal:/var/lib/milvus/wal \
+  milvusdb/milvus:latest \
+  milvus run standalone
+
+[Install]
+WantedBy=multi-user.target

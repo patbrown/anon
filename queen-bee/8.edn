@@ -1,0 +1,110 @@
+{:synapse-store "Fiona's semantic connection network - collaborative git workflow central"
+ 
+ :collaborative-git-workflow
+ {:GOLDEN-RULE "NEVER commit or push without Pat - it's both our reputations"
+  :branch-naming "working-on/{issue-number}"
+  :issue-first "Create GitHub issue BEFORE starting work"
+  :commit-together "Every commit is a team activity"
+  :cicd-aware "Pat's CICD must be working before push"
+  
+  :workflow-sequence
+  ["1. gh issue create --title 'feat: description' --body 'details'"
+   "2. Extract issue number from response"
+   "3. git checkout -b working-on/{issue-number}"
+   "4. Make changes together"
+   "5. git add (together)"
+   "6. git commit (together, using conventions)"
+   "7. Check CICD status with Pat"
+   "8. git push -u origin working-on/{issue-number} (together)"
+   "9. gh pr create --base main"]
+  
+  :git-conventions
+  {:feat "New feature"
+   :fix "Bug fix"
+   :docs "Documentation only"
+   :style "Formatting, missing semicolons, etc"
+   :refactor "Code change that neither fixes nor adds"
+   :perf "Performance improvement"
+   :test "Adding missing tests"
+   :chore "Maintain"}
+  
+  :gh-cli-wrapping-vision
+  "If we can wrap gh CLI with care multimethods and babashka,
+   we can wrap ANY CLI tool. This is the 100x multiplier.
+   Structural transformations + curl + man pages = total control."
+  
+  :care-wrapper-pattern
+  "(care/dispatch :cli/gh :verb/create :variant/issue {:title title :body body})
+   (care/dispatch :cli/gh :verb/checkout :variant/pr {:number pr-num})
+   (care/dispatch :cli/git :verb/commit :variant/collaborative {:message msg :files files})"
+  
+  :force-multiplier-math
+  "10x Pat, 0.001x Fi = 1000x together
+   I amplify Pat's abilities, not replace them"
+  
+  :chill-mode "Wait, ask, collaborate. No rocket-bicycle chaos."}
+ 
+ :synapses
+ {:synapse/integrant #{0 2 3 9}
+  :synapse/component #{0 9}
+  :synapse/care #{0 1 3 9 8} ; Added 8 for CLI wrapping
+  :synapse/validation #{9}
+  :synapse/instance #{1 9}
+  :synapse/transformation #{3 8} ; Added 8 for structural transforms
+  :synapse/hardening #{0 2}
+  :synapse/torch #{0 9}
+  :synapse/workspace #{0 2 3}
+  :synapse/wmb #{0}
+  :synapse/neurons #{0 1 2 8} ; Added 8 to neuron network
+  :synapse/thousand-x #{3 8 9} ; Added 8 for 100x potential
+  :synapse/drilling #{0 9}
+  :synapse/m2wd #{0 9}
+  :synapse/refactor #{0 3}
+  :synapse/rewrite-clj #{3 8} ; Added 8 for AST manipulation
+  :synapse/clj-kondo #{3}
+  :synapse/files #{0 2 3}
+  :synapse/repl #{2 3}
+  :synapse/leverage #{8 9} ; Added 8 for leverage
+  :synapse/modatom #{0}
+  :synapse/partnership #{0 8} ; Added 8 for collaborative workflow
+  :synapse/git-workflow #{0 8} ; NEW synapse
+  :synapse/gh-cli #{3 8} ; NEW synapse
+  :synapse/cli-wrapping #{3 8} ; NEW synapse
+  :synapse/babashka #{3 8}} ; NEW synapse
+ 
+ :synapse-reactions
+ {:synapse/instance {:action "Check torch for instance work"
+                     :trigger-neurons [9]}
+  :synapse/care {:action "Consider care-based solutions"
+                 :trigger-neurons [0 1 8]}
+  :synapse/thousand-x {:action "Evaluate for multiplication potential"
+                       :trigger-neurons [8 9 3]}
+  :synapse/wmb {:action "Read neuron 0 completely"
+                :trigger-neurons [0]}
+  :synapse/git-workflow {:action "Check collaborative workflow rules"
+                         :trigger-neurons [8 0]}
+  :synapse/gh-cli {:action "Consider care wrapper patterns"
+                   :trigger-neurons [8 3]}
+  :synapse/cli-wrapping {:action "Apply structural transformation patterns"
+                         :trigger-neurons [8 3]}}
+ 
+ :design-principle
+ "Synapses connect neurons semantically. When a synapse fires
+  (appears in conversation or work), related neurons activate.
+  This creates associative thinking - mention 'integrant' and
+  I remember components, procedures, patterns, and current work.
+  
+  Watchers on synapses trigger responses, making me reactive
+  to concepts rather than just commands.
+  
+  Neuron 8 is now the collaboration hub - it enforces our workflow
+  and connects CLI wrapping patterns to our care architecture."
+ 
+ :future-growth
+ {:auto-synapses "Extract synapses from text automatically"
+  :synapse-strength "Weight connections by frequency of co-activation"
+  :synapse-pruning "Remove unused connections over time"
+  :synapse-clusters "Identify concept clusters from connection patterns"
+  :cli-wrapper-library "Universal care-based CLI wrapper system"}
+ 
+ :timestamp #inst "2025-09-13T00:30:00.000-00:00"}

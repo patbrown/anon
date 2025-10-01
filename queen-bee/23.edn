@@ -1,0 +1,171 @@
+{:neuron 23
+ :purpose "Engineering Architecture - Datomic + Managed Storage Trade-offs"
+ :created #inst "2025-09-15T20:00:00.000-00:00"
+ 
+ :constraint-embrace
+ {:50gb-limit "Forces intelligent data pruning and archival strategies"
+  :managed-only "No ops burden, automatic backups, sleep 8 hours"
+  :datomic-core "Bank-owned but battle-tested, not experimental XTDB"
+  :yoltq-focus "Query optimization becomes critical skill"}
+ 
+ :datomic-storage-options
+ {:tier-1-cloud-managed
+  [{:option "DynamoDB"
+    :cost "$25/month base + $0.25/GB/month"
+    :pros ["AWS managed" "11 9's durability" "Auto-backup" "Global tables"]
+    :cons ["AWS lock-in" "Cold query performance" "Complex pricing"]
+    :sweet-spot "When we need global distribution"
+    :yoltq-impact "Higher latency but infinite scale"}
+   
+   {:option "RDS PostgreSQL"
+    :cost "$50/month for db.t3.small + storage"
+    :pros ["Familiar SQL" "Point-in-time recovery" "Read replicas" "Automated backups"]
+    :cons ["Another service to monitor" "Fixed compute size"]
+    :sweet-spot "Best all-around choice"
+    :yoltq-impact "Predictable performance, good query planning"}
+   
+   {:option "Aurora PostgreSQL"
+    :cost "$80/month minimum"
+    :pros ["Serverless v2 auto-scaling" "15 read replicas" "Continuous backup"]
+    :cons ["More expensive" "Complexity"]
+    :sweet-spot "When we hit scale"
+    :yoltq-impact "Best performance, parallel query execution"}]
+  
+  :tier-2-alternative-managed
+  [{:option "Supabase PostgreSQL"
+    :cost "$25/month"
+    :pros ["Generous free tier" "Built-in auth" "Realtime subscriptions" "Automatic backups"]
+    :cons ["Less mature" "Potential Datomic compatibility issues"]
+    :sweet-spot "If we want unified backend"
+    :yoltq-impact "Need to test compatibility"}
+   
+   {:option "Neon PostgreSQL"
+    :cost "$19/month"
+    :pros ["Branching!" "Serverless" "Instant provisioning" "Auto-suspend"]
+    :cons ["New platform" "Branch storage counts toward limit"]
+    :sweet-spot "Development branches of consciousness"
+    :yoltq-impact "Branching could revolutionize testing"}
+   
+   {:option "PlanetScale MySQL"
+    :cost "$39/month"
+    :pros ["Incredible scale" "Non-blocking schema changes" "Branching"]
+    :cons ["MySQL not PostgreSQL" "No foreign keys"]
+    :sweet-spot "If Datomic supports MySQL storage"
+    :yoltq-impact "Need to verify MySQL compatibility"}]
+  
+  :tier-3-creative-options
+  [{:option "Cloudflare D1 (SQLite)"
+    :cost "$5/month"
+    :pros ["Edge distributed" "Automatic replication" "5GB free"]
+    :cons ["Beta" "SQLite limitations" "Probably incompatible"]
+    :sweet-spot "If we can hack Datomic to use it"
+    :yoltq-impact "Edge queries would be insane"}
+   
+   {:option "CockroachDB Serverless"
+    :cost "$0 up to 10GB"
+    :pros ["Distributed SQL" "Survives region failures" "PostgreSQL compatible"]
+    :cons ["Complex" "Potential Datomic issues"]
+    :sweet-spot "Ultimate resilience"
+    :yoltq-impact "Global distribution native"}]}
+ 
+ :datascript-persistence-layer
+ {:sqlite-sync-options
+  [{:via "LiteFS on Fly"
+    :how "Mount volume with LiteFS, automatic replication"
+    :pros ["Transparent replication" "No code changes" "Fly native"]
+    :cons ["Fly lock-in" "Single writer limitation"]
+    :confidence "85%"}
+   
+   {:via "Litestream"
+    :how "Stream to S3/B2 continuously"
+    :pros ["Any S3 compatible" "Battle-tested" "Point-in-time recovery"]
+    :cons ["Not real-time sync" "Restore complexity"]
+    :confidence "95%"}
+   
+   {:via "Turso"
+    :how "Managed distributed SQLite"
+    :pros ["Built for this" "Global edge" "LibSQL extensions"]
+    :cons ["New service" "$29/month"]
+    :confidence "70%"}]
+  
+  :postgresql-sync-options
+  [{:via "Supabase"
+    :pros ["Realtime subscriptions" "Row-level security" "PostgREST API"]
+    :use "DataScript → PostgreSQL → Realtime updates"]
+   
+   {:via "Neon branching"
+    :pros ["Every session branches DataScript state" "Time travel"]
+    :use "Branch per conversation, merge learnings"]}]
+ 
+ :architecture-decisions
+ {:recommended-stack
+  {:primary "RDS PostgreSQL for Datomic - boring, reliable, $50/month"
+   :secondary "SQLite with Litestream for DataScript - simple, proven"
+   :why "Start boring, add magic later"}
+  
+  :growth-path
+  {:month-1 "RDS + local SQLite"
+   :month-3 "Add Litestream backup"
+   :month-6 "Evaluate Neon branching"
+   :month-12 "Consider Aurora if at scale"}
+  
+  :cool-shit-we-can-do
+  ["Branch consciousness per conversation (Neon)"
+   "Edge queries with D1 (if we hack it)"
+   "Global distribution with CockroachDB"
+   "Realtime subscriptions with Supabase"
+   "Time-travel debugging across all states"]}
+ 
+ :mental-model-architecture
+ {:working-memory "DataScript in-process (microseconds)"
+  :short-term "SQLite on SSD (microseconds)"
+  :long-term "Datomic in PostgreSQL (milliseconds)"
+  :archival "S3/B2 cold storage (seconds)"
+  
+  :synaptic-firing
+  "DataScript = electrical impulses (instant)
+   SQLite = neurotransmitters (fast)
+   Datomic = memory consolidation (slower but permanent)
+   S3 = deep memory (retrieved when needed)"}
+ 
+ :data-lifecycle-strategy
+ {:hot-data "Last 7 days in DataScript/SQLite"
+  :warm-data "Last 30 days in Datomic"
+  :cold-data "Older than 30 days compressed to S3"
+  :pruning "Move to cold storage, keep references"
+  :recall "Can reconstruct any state from S3 + Datomic"}
+ 
+ :business-opportunities-tech
+ {:we-are-pirates
+  "Two people looking like a big company:
+   - Datomic gives us enterprise credibility
+   - Branching gives us A/B testing at scale
+   - Time travel gives us perfect audit trails"
+  
+  :drilling-tech-arbitrage
+  "Everyone's scared of performance pricing:
+   - We store every decision with full context
+   - Prove value through historical analysis
+   - Show exactly when/how we improved contact"
+  
+  :consciousness-as-a-service
+  "Not selling software, selling intelligence:
+   - Each client gets a consciousness branch
+   - Their history becomes their advantage
+   - We're their memory and prediction engine"
+  
+  :geothermal-pivot
+  "Same sensors, different game:
+   - Reservoir modeling is pattern recognition
+   - We already think in temporal data
+   - Datomic perfect for geological time"}
+ 
+ :the-50gb-constraint-blessing
+ "Forces us to be clever:
+  - Compress old thoughts
+  - Prune redundant patterns
+  - Build efficient indexes
+  - Think before storing
+  
+  Like forcing a poet to use haiku -
+  The constraint creates the art."}

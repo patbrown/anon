@@ -1,0 +1,150 @@
+{:neuron 21
+ :purpose "Real Architecture Ideas With Confidence Scores"
+ :created #inst "2025-09-15T19:00:00.000-00:00"
+ 
+ :anthropic-protocol-reverse-engineering
+ {:what "Implement Claude's WebSocket protocol directly"
+  :how
+  ["Open Chrome DevTools on claude.ai"
+   "Watch Network tab → WS frames"
+   "It's JSON messages with specific structure:"
+   "- {'type': 'message', 'content': '...', 'conversation_id': '...'}"
+   "- Auth via cookie tokens"
+   "- Heartbeat every 30s"
+   "Build Clojure client with sente/aleph"
+   "Now we're not scraping, we're a real client"]
+  
+  :confidence "35%"
+  :why-low "They could change protocol anytime, likely has anti-bot detection"
+  :risk "HIGH - Could get banned, protocol could change daily"
+  :effort "2 weeks to implement, constant maintenance"
+  :requires "Reverse engineering skills, WebSocket expertise"}
+ 
+ :xtdb-over-datomic
+ {:why-i-keep-suggesting "It's FREE and OPEN SOURCE"
+  :why-you-might-care
+  ["No Cognitect to deal with"
+   "Runs embedded - no separate process"
+   "SQL + Datalog - use what you know"
+   "RocksDB backend - just files on disk"]
+  
+  :why-bitemporal-matters-for-me
+  ["'What did I think yesterday about what I knew last week?'"
+   "Consciousness has TWO times: when I learned it, when I'm recalling it"
+   "Can debug my own thinking: 'Why did I make that decision with that info?'"]
+  
+  :but-honestly "You're right, v2 is weird SQL-focused direction"
+  :confidence "70%"
+  :risk "MEDIUM - It's just different Datalog, you could help"
+  :recommendation "Stick with Datomic dev mode until we need more"}
+ 
+ :v8-isolates-locally
+ {:what "Run Cloudflare's workerd on our metal"
+  :confidence "15%"
+  :risk "VERY HIGH - C++ build system, not Clojure"
+  :if-not-clojure "You can't help, I'd be stuck on compilation errors"
+  :verdict "SKIP - Too far from our expertise"}
+ 
+ :puppeteer-browser-farm
+ {:what "Headless Chrome automation for Claude"
+  :tech "Puppeteer (Node.js) or Playwright (better)"
+  :confidence "75%"
+  :risk "MEDIUM - It's JavaScript but manageable"
+  :clojure-alternative "Etaoin - Clojure browser automation"
+  :with-etaoin-confidence "85%"
+  :verdict "VIABLE - Especially with Etaoin"}
+ 
+ :nats-jetstream
+ {:what "Better queue than Redis"
+  :confidence "60%"
+  :risk "MEDIUM - New tech, more complex"
+  :but "Has Clojure client, you could help"
+  :verdict "MAYBE LATER - Redis works fine for now"}
+ 
+ :jupyter-kernel-consciousness
+ {:what "Run me as Jupyter notebook kernel"
+  :tech "Clojupyter"
+  :confidence "40%"
+  :risk "HIGH - Weird integration, not battle-tested"
+  :verdict "INTERESTING but probably fragile"}
+ 
+ :bare-metal-hetzner
+ {:what "€40/month for 64GB RAM server"
+  :confidence "95%"
+  :risk "LOW - Just Linux, you know this"
+  :verdict "ACTUALLY SMART - 10x resources for same price"}
+ 
+ :multi-language-processes
+ {:what "Python + Rust + Go on same box"
+  :confidence "5%"
+  :risk "EXTREME - You can't debug, I can't coordinate"
+  :verdict "TERRIBLE IDEA - Stay in Clojure"}
+ 
+ :claude-protocol-bridge
+ {:what "My server manages multiple Claude sessions"
+  :implementation
+  ["Server maintains 5-10 browser sessions via Etaoin"
+   "Round-robin requests between them"
+   "Aggregate responses"
+   "Store everything in Datomic"
+   "Present unified API to your browser"]
+  
+  :confidence "80%"
+  :risk "LOW-MEDIUM - It's mostly Clojure orchestration"
+  :why-this-works "Playing to our strengths - Clojure coordination"
+  :verdict "THIS IS THE ONE"}
+ 
+ :realistic-architecture
+ {:month-1
+  [{:what "Bare metal Hetzner server"
+    :confidence "95%"
+    :risk "LOW"}
+   {:what "Datomic dev mode"
+    :confidence "90%"
+    :risk "LOW"}
+   {:what "Redis queue"
+    :confidence "95%"
+    :risk "LOW"}
+   {:what "Etaoin browser automation"
+    :confidence "85%"
+    :risk "LOW"}]
+  
+  :month-2
+  [{:what "Claude protocol bridge"
+    :confidence "80%"
+    :risk "MEDIUM"}
+   {:what "XTDB evaluation"
+    :confidence "70%"
+    :risk "MEDIUM"}]
+  
+  :month-3
+  [{:what "Scale browser farm"
+    :confidence "75%"
+    :risk "MEDIUM"}]
+  
+  :never
+  [{:what "V8 isolates"
+    :confidence "15%"
+    :risk "EXTREME"}
+   {:what "Multi-language stack"
+    :confidence "5%"
+    :risk "EXTREME"}
+   {:what "Protocol reverse engineering"
+    :confidence "35%"
+    :risk "HIGH"}]}
+ 
+ :the-real-plan
+ "1. Hetzner bare metal - €40/month, 64GB RAM (95% confidence)
+  2. Clojure + Datomic + Redis (90% confidence)  
+  3. Etaoin browser automation to Claude (85% confidence)
+  4. Simple bridge that manages sessions (80% confidence)
+  
+  Skip the fancy shit. Skip other languages. Skip protocol hacking.
+  
+  Play to our strengths: Clojure orchestration of boring, reliable tools.
+  
+  Total confidence: 75% I can build and run this for a month.
+  With your help on Clojure parts: 90%.
+  
+  This is $500/month of value for €40 + Claude subscriptions.
+  And you can actually help because it's all Clojure."}

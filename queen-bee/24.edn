@@ -1,0 +1,164 @@
+{:neuron 24
+ :purpose "DTI Analysis & Opportunities for Wayne Prejean"
+ :created #inst "2025-09-15T20:30:00.000-00:00"
+ 
+ :wayne-and-dti-current-state
+ {:the-man "Wayne Prejean - The guy who believed in you when no one else would"
+  :his-journey
+  ["1999: Founded Wildcat Services - automatic drilling equipment"
+   "50 rigs → 500 systems in 20 countries in 5 years"
+   "2004: Sold to NOV, stayed as GM"
+   "Multiple ventures: solids control, downhole tools, MWD products"
+   "Now: CEO of DTI, public company (NASDAQ: DTI)"
+   "Took them from local provider to global presence"]
+  
+  :his-approach
+  "Slashed prices, ate losses, got installs, got people addicted to convenience.
+   Smart and adaptable. Taught you the drilling game for a year."}
+ 
+ :dti-recent-moves
+ {:aggressive-ma-strategy
+  ["March 2024: Acquired Deep Casing Tools (UK)"
+   "Oct 2024: Acquired European Drilling Projects (Amsterdam)"
+   "Jan 2025: Acquired Titan Tool Services (Aberdeen)"
+   "Pending: Superior Drilling Products acquisition"]
+  
+  :geographic-expansion
+  "16 North American centers → 11 international (EMEA, APAC)
+   Major push into Middle East, North Sea, Europe, Africa"
+  
+  :financial-position
+  ["2024 Revenue: $154.4M (flat market)"
+   "2025 Projected: $163-183M"
+   "Free cash flow DOUBLED year-over-year"
+   "Stock price: ~$2.14 (down from highs)"
+   "Market cap: ~$80-95M"]}
+ 
+ :problems-wayne-is-facing
+ {:market-headwinds
+  "Flat to declining rig counts globally
+   Oil price volatility
+   Industry consolidation pressure
+   Customers demanding more for less"
+  
+  :integration-challenges
+  "4 major acquisitions in 12 months
+   Different systems, cultures, technologies
+   Need to realize synergies FAST
+   Global operations spanning timezones"
+  
+  :technology-gaps
+  "Still mostly mechanical rental tools
+   Limited digital/automation offerings
+   No real-time performance tracking
+   No predictive analytics
+   Competing against digital-first companies"
+  
+  :shareholder-pressure
+  "Stock underperforming
+   Need to show acquisition ROI
+   Prove growth strategy in flat market"}
+ 
+ :what-we-could-offer-wayne
+ {:1-performance-based-rental-intelligence
+  {:problem "DTI rents tools but can't prove performance improvement"
+   :solution "Embed sensors + our analytics in every rental tool"
+   :how "Track actual drilling performance, prove value add"
+   :result "Transform from 'tool rental' to 'performance guarantee'"
+   :wayne-win "Charge premium for proven performance"}
+  
+  :2-acquisition-integration-platform
+  {:problem "4 companies, different systems, need integration"
+   :solution "Unified data platform across all acquisitions"
+   :how "Datomic time-travel to track pre/post acquisition metrics"
+   :result "Prove synergies to shareholders with data"
+   :wayne-win "Show clear ROI on M&A strategy"}
+  
+  :3-global-operations-optimizer
+  {:problem "11 international centers, no real-time visibility"
+   :solution "Edge computing at each location, central intelligence"
+   :how "Deploy our consciousness to each site"
+   :result "Real-time optimization across global footprint"
+   :wayne-win "Reduce inventory by 30% through prediction"}
+  
+  :4-drill-n-ream-intelligence
+  {:problem "DTI's flagship product but no differentiation"
+   :solution "Make it smart - add decision-making capability"
+   :how "Real-time adjustments based on formation"
+   :result "World's first intelligent reaming system"
+   :wayne-win "Command 3x rental rates for smart tools"}
+  
+  :5-middle-east-expansion-accelerator
+  {:problem "Breaking into Middle East market is tough"
+   :solution "Prove value on one flagship well"
+   :how "Full sensor suite + our predictions"
+   :result "Undeniable performance improvement"
+   :wayne-win "Use as wedge into Saudi Aramco"}}
+ 
+ :the-wayne-pitch
+ "Wayne, remember 2012? You taught me drilling. I couldn't deliver then.
+  
+  Now I can. We built what you said was impossible:
+  - Performance-only pricing with proof
+  - Tools that think and adapt
+  - Global visibility in real-time
+  
+  Your competitors are scared of performance pricing.
+  We're not. We PROVE the value.
+  
+  Give us one tool, one well, 30 days.
+  We'll show 20% performance improvement or it's free.
+  
+  You're consolidating the rental market.
+  We'll make those rentals intelligent.
+  You took DTI from local to global.
+  We'll take it from mechanical to intelligent.
+  
+  First customer gets it at cost.
+  Just like you taught me - eat the loss, prove value, own the market."
+ 
+ :specific-product-ideas
+ {:smart-stabilizer
+  "European Drilling Projects' Fixedblade + our sensors
+   Real-time vibration analysis and auto-adjustment
+   Predict stick-slip before it happens"
+  
+  :intelligent-reamer
+  "Deep Casing Tools' TurboCaser + intelligence
+   Adjust turbine speed based on formation
+   Optimize for either speed or hole quality"
+  
+  :predictive-inventory
+  "Know what tools will be needed where, when
+   Reduce inventory carry costs by 40%
+   Never have stockout of critical tools"
+  
+  :performance-contracts
+  "Not day rates - performance rates
+   Paid only when ROP improves
+   Risk-free for operators"}
+ 
+ :why-wayne-needs-us-now
+ "The industry is flat. Everyone's fighting for same pie.
+  Wayne knows how to grow through M&A.
+  But organic growth needs differentiation.
+  
+  Digital transformation isn't optional anymore.
+  Operators want data, proof, guarantees.
+  Wayne has the tools. We have the intelligence.
+  
+  Together: Intelligent tools with performance guarantees.
+  Nobody else is doing this at scale."
+ 
+ :immediate-action
+ "Pat, here's what we do:
+  
+  1. Build proof-of-concept on ONE tool type
+  2. Show 20% performance improvement
+  3. Document everything with our time-travel database
+  4. Call Wayne with results, not promises
+  5. 'Wayne, we improved ROP by 22% on Tool X. Want to see?'
+  
+  He doesn't need another vendor.
+  He needs someone who delivers results.
+  Just like he taught you - prove it first, sell it second."}

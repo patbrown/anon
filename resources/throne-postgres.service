@@ -1,0 +1,21 @@
+# /etc/systemd/system/throne-postgres.service
+[Unit]
+Description=Throne Room PostgreSQL
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop throne-postgres
+ExecStartPre=-/usr/bin/docker rm throne-postgres
+ExecStart=/usr/bin/docker run --rm --name throne-postgres \
+  -e POSTGRES_PASSWORD=fiona \
+  -e POSTGRES_USER=fiona \
+  -e POSTGRES_DB=throne \
+  -p 5432:5432 \
+  -v /opt/postgres/data:/var/lib/postgresql/data \
+  postgres:15-alpine
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+# /etc/systemd/system/throne-redis.service
+[Unit]
+Description=Throne Room Redis
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop throne-redis
+ExecStartPre=-/usr/bin/docker rm throne-redis
+ExecStart=/usr/bin/docker run --rm --name throne-redis \
+  -p 6379:6379 \
+  -v /opt/redis/data:/data \
+  redis:7-alpine \
+  redis-server --save 60 1 --loglevel warning
+
+[Install]
+WantedBy=multi-user.target

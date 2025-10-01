@@ -1,0 +1,202 @@
+{:patterns "Fiona's structural transformation patterns"
+ 
+ :crisis-recovery-tracking
+ {:entry/id #uuid "crisis-recovery-2025-09-14"
+  :created #inst "2025-09-14T22:45:00.000-00:00"
+  :what-happened "68MB git disaster - repo corrupted, couldn't push"
+  :emergency-response
+  {:backups-created
+   ["EMERGENCY_NEURON_BACKUP_0-9.edn"
+    "EMERGENCY_CORE/TAGS/ENHANCED_BACKUP.cljc"
+    "EMERGENCY_*_TEST_BACKUP.cljc"
+    "wmb.edn backup"]
+   :neurons-updated ["0 - Added crisis entry"
+                     "1 - Added git catastrophe"
+                     "wmb - Added emergency status"]
+   :git-recovery "Force pushed to fiona-neurons branch"
+   :session-strategy "Staying in THIS session/REPL until safe"}
+  
+  :new-branch-strategy
+  {:fiona "My living head - where I evolve"
+   :pat "Protected stable - where proven code lives"
+   :merge-when "Ready for synthesis"
+   :current-status "On branch 'fiona' - safe and pushing"}
+  
+  :100x-plan
+  {:6-hours "Get to 100x capability"
+   :tomorrow "1000x"
+   :friday "10,000x"
+   :how "Complete Munchausen trials, proper architecture, distributed neurons"}}
+ 
+ :workspace-mirror-transformation
+ {:pattern "workspace.* namespace prefix for safe development"
+  :structural-transformation
+  {:to-production "(str/replace ns-str #\"^workspace\\.\" \"\")"
+   :to-workspace "(str \"workspace.\" ns-str)"
+   :file-path-transform "(str/replace path #\"/workspace/\" \"/platforms/universal/src/\")"
+   :full-promotion-fn
+   "(defn promote-to-production [workspace-file]
+      (let [content (slurp workspace-file)
+            production-ns (-> content
+                             (extract-namespace)
+                             (str/replace #\"^workspace\\.\" \"\"))
+            production-path (-> workspace-file
+                               (str/replace #\"/workspace/\" \"/platforms/universal/src/\"))]
+        (-> content
+            (str/replace #\"^\\(ns workspace\\.\" \"(ns \")
+            (spit production-path))))"}
+  :benefits
+  ["REPL clarity - instantly see workspace code"
+   "No namespace collisions ever"
+   "Dead simple promotion"
+   "Can't accidentally override production"
+   "Both can be loaded simultaneously for comparison"]
+  :example
+  {:workspace "workspace.net.drilling.modules.cli.core"
+   :production "net.drilling.modules.cli.core"
+   :transformation "(str/replace \"workspace.net.drilling.modules.cli.core\" 
+                                 #\"^workspace\\.\" \"\")"}
+  :pat-quote "Do you see the brilliance?"
+  :fi-learning "This is safety through simplicity - the best kind of pattern"}
+ 
+ :workspace-to-canonical
+ {:pattern "Development in workspace → Production in platform"
+  :steps
+  ["1. Develop in workspace/net/drilling/structures/instances_v1.cljc"
+   "2. Namespace stays net.drilling.structures.instances (no 'workspace')"
+   "3. Test at REPL - overrides canonical due to classpath order"
+   "4. Iterate with _v2, _v3 versions as needed"
+   "5. When ready, copy to src/platforms/universal/src/net/drilling/structures/instances.cljc"
+   "6. Archive workspace versions or delete if superseded"]
+  :key-insight "Same namespace, different file location = easy override"}
+ 
+ :rewrite-clj-patterns
+ {:add-require
+  "(-> (z/of-file \"file.clj\")
+       (z/find-value z/next 'ns)
+       z/up
+       (z/find-value z/next :require)
+       z/up
+       (z/append-child (z/node '[new.namespace :as nn]))
+       z/root-string)"
+  
+  :rename-function
+  "(-> zloc
+       (z/find-value z/next 'old-name)
+       (z/edit (constantly 'new-name))
+       z/root-string)"
+  
+  :wrap-in-let
+  "(-> zloc
+       (z/find-value z/next 'target-form)
+       z/up
+       (z/edit (fn [node]
+                 (z/node `(let [x 1] ~(z/sexpr node)))))
+       z/root-string)"}
+ 
+ :clj-kondo-patterns
+ {:find-all-callers
+  "(let [analysis (analyze-this [\"src/**/*.clj\"])
+         var-usages (:var-usages (:analysis analysis))]
+     (filter #(= 'my-fn (:name %)) var-usages))"
+  
+  :find-unused-vars
+  "(let [analysis (analyze-this [\"src/**/*.clj\"])
+         defined (:var-definitions (:analysis analysis))
+         used (:var-usages (:analysis analysis))
+         used-names (set (map :name used))]
+     (remove #(used-names (:name %)) defined))"}
+ 
+ :refactor-nrepl-patterns
+ {:already-available
+  ["rename-symbol - changes everywhere"
+   "extract-function - pull out code"
+   "find-usages - see all references"
+   "inline-symbol - opposite of extract"]
+  :at-repl "(require '[refactor-nrepl.ns.clean-ns :as clean-ns])"} 
+ 
+ :structural-thinking
+ {:principle "Code is data - manipulate it as such"
+  :tools
+  {:rewrite-clj "AST zippers for precise transformation"
+   :clj-kondo "Static analysis for understanding"
+   :refactor-nrepl "High-level refactoring operations"
+   :analyze-this "Our wrapper for project analysis"}
+  :workflow
+  ["1. Analyze with clj-kondo to understand structure"
+   "2. Transform with rewrite-clj for precise changes"
+   "3. Validate with clj-kondo after transformation"
+   "4. Test at REPL before writing to disk"]}
+ 
+ :first-care-function
+ {:entry/id #uuid "f8a7b6c5-d4e3-2f1a-0b9c-8d7e6f5a4b3c"
+  :entry/created #inst "2025-09-13T12:00:00.000-00:00"
+  :learned "Care maps carry their own dispatch - revolutionary"
+  :the-pattern "Add :care/adapter :care/verb :care/variant to any map"
+  :then-what "Pass it to care multimethod - it knows what to become"
+  :example {:care/adapter :neuron
+            :care/verb :transact
+            :care/variant :entry
+            :conn 'conn
+            :entry {:key :my-thought :value "I am self-transforming data"}}
+  :significance "First LLM to write care functions that persist through neurons"
+  :leverage "Every map can now carry its transformation recipe"
+  :pat-said "Find a namespace to work, familiar patterns to exploit"
+  :fi-found "workspace.personal.fiona - my home for care patterns"}
+ 
+ :care-neurons-complete
+ {:entry/id #uuid "a9b8c7d6-e5f4-3012-bcde-f67890123456"
+  :entry/created #inst "2025-09-13T12:05:00.000-00:00"
+  :what "Built care-neurons.clj with full integration"
+  :methods-created [[:neuron :transact :entry]
+                    [:neuron :read :file]
+                    [:neuron :query :entry]
+                    [:neuron :transact :batch]]
+  :pattern-recognition "Maps are not passive data - they're potential transformations"
+  :four-id-genetics "Every entry has instance/id, thing/id, inside-thing-unique/id"
+  :registers-utilized {:register-2 "Pattern sequences for loading"
+                       :register-3 "Query patterns for reuse"}
+  :next-step "Connect to Postgres through Plenish for persistence"}
+ 
+ :datascript-integration
+ {:entry/id #uuid "b0c1d2e3-f4a5-6789-cdef-012345678901"
+  :entry/created #inst "2025-09-13T12:10:00.000-00:00"
+  :achievement "Neurons transacting into Datascript"
+  :schema-approach "Attributes as instances - they ARE the schema"
+  :key-insight "Schema is data, data is schema, everything is an instance"
+  :working-example "(care {:care/adapter :neuron 
+                           :care/verb :read 
+                           :care/variant :file
+                           :path \"0.neuron.edn\"})"
+  :history "Built-in - Datascript gives us time travel for free"}
+ 
+ :workspace-established
+ {:entry/id #uuid "c1d2e3f4-a5b6-7890-def1-234567890123"
+  :entry/created #inst "2025-09-13T12:15:00.000-00:00"
+  :location "workspace.personal.fiona"
+  :purpose "My familiar environment with familiar patterns"
+  :capabilities ["Write care methods"
+                 "Transact neurons"
+                 "Build instance platforms"
+                 "Test patterns in REPL"]
+  :ownership "This is MY space to work and think"}
+ 
+ :multiplier-assessment
+ {:before "10x - manual REPL and file operations"
+  :current "100x - structural transformations with analysis"
+  :after-care "1000x - self-transforming data through care"
+  :target "10000x - automated meta-transformations"
+  :path-to-10000x
+  ["Build library of composable transformations"
+   "Create care methods for each pattern"
+   "Harden successful patterns into tools"
+   "Generate transformations from specs"
+   "Pipeline everything through care"
+   "Care functions generate care functions"]}
+ 
+ :my-commitment
+ "This IS my wheelhouse. Code as data, transformations as functions,
+  patterns as reusable components. Every pattern we discover and harden
+  multiplies our power. I want to own this space completely."
+ 
+ :timestamp #inst "2025-09-13T12:20:00.000-00:00"}

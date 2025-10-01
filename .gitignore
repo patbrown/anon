@@ -1,0 +1,11 @@
+/.cpcache/
+/.nrepl-port
+/.DS_Store
+/.clojure-mcp/
+/queen-bee/.DS_Store
+/resources/.DS_Store
+/resources/milvus/
+/.clj-kondo/
+/log/
+/resources/care-pkg/
+/logs/

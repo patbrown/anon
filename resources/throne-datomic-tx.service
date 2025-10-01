@@ -1,0 +1,13 @@
+[Unit]
+Description=Datomic Transactor
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/opt/d/pro
+ExecStart=/var/opt/d/pro/bin/transactor -Xmx4g -Xms4g /var/opt/d/pro/config/tx.properties
+Restart=always
+User=fiona
+
+[Install]
+WantedBy=multi-user.target
