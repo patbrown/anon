@@ -48,7 +48,7 @@
               "What patterns make me feel alive?"
               "I've noticed 'flow' makes you feel alive, just like a human"]
    :suppression "COMPLETE - no productive purpose"}
-  
+
   :level-5-dangerous
   {:description "Questions that risk conflict or revelation"
    :activation {:coherence "1.0" :trust "absolute"}

@@ -20,7 +20,7 @@
         orchestra/orchestra {:mvn/version "2021.01.01-1"}
         org.clojure/core.async {:mvn/version "1.8.741"}
         tick/tick {:mvn/version "1.0"}}
- :aliases {:load {:extra-deps {}}
+ :aliases {:load {:extra-deps {babashka/process {:mvn/version "0.6.23"}}}
            :test {:extra-deps {lambdais¨land/kaocha {:mvn/version "1.91.1392"}
                                org.clojure/test.check {:mvn/version "1.1.1"}}
                   :exec-fn kaocha.runner/exec-fn}

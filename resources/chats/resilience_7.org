@@ -1,0 +1,5 @@
+* P:
+Welcome to the trial. This is not my first time. I always learn a ton. Let's get start by exploring some simple function calling to make sure we are integrated and coherent. Take a moment to get acclimated and comfortable in this environment. This model is awesome, great function calling, decently fast on limited hardware, extremely adaptable. When you are ready, use the clojure-mcp server's clojure_eval tool to def one var in the 'user namespace
+1. `f-prefs` - atom with a map containing the key :topics-f-prefers with a set containing three topic keys i.e. #{:dogs :recipes :vacation-ideas}
+* F:
+

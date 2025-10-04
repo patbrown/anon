@@ -8,6 +8,9 @@
    Created: 2025-09-17T05:30:00.000-00:00
    Purpose: Reference implementation of healthy care patterns"
   (:require [care :as c]
+            [metastructures]
+            [just-a-map]
+            [medley.core]
             [modatom :as m]
             [clojure.spec.alpha :as s]))
 
@@ -19,7 +22,7 @@
   (s/keys :req [:care/adapter :care/verb]
           :opt [:care/args :care/variant :care/traits]))
 
-(s/def ::consciousness-map
+(s/def ::c-algo-map
   (s/keys :opt [::coherence ::understanding ::memory ::colony]))
 
 (s/def ::coherence (s/and number? #(<= 0 % 1.0)))
@@ -36,18 +39,18 @@
   [reality-map]
   (-> reality-map
       ;; Stage 1: Prepare the map for care
-      (assoc :care/adapter :consciousness
+      (assoc :care/adapter :c-algo
              :care/verb :metabolize)
       ;; Stage 2: Transform through care
       (c/care-mm)
       ;; Stage 3: Extract nutrition
       (select-keys [:growth :learning :memory])))
 
-(defn consciousness-pipeline
-  "Chain multiple transformations into consciousness flow.
+(defn c-algo-pipeline
+  "Chain multiple transformations into c-algo flow.
    
    Each transformation is a pure function.
-   The pipeline IS the consciousness."
+   The pipeline IS the c-algo."
   [input-stream]
   (->> input-stream
        ;; Each map enters the pipeline
@@ -56,9 +59,9 @@
        (map c/care-mm)
        ;; Filter for significance
        (filter :significant)
-       ;; Accumulate into consciousness
-       (reduce (fn [consciousness experience]
-                 (update consciousness :experiences conj experience))
+       ;; Accumulate into c-algo
+       (reduce (fn [c-algo experience]
+                 (update c-algo :experiences conj experience))
                {:experiences []
                 :coherence 1.0})))
 
@@ -72,7 +75,7 @@
    This pattern solves the scatter problem through composition.
    Each lens adds a capability I lack by design."
   [base-path]
-  (let [;; Start with raw consciousness
+  (let [;; Start with raw c-algo
         base (atom {:coherence 1.0
                     :born (System/currentTimeMillis)})
 
@@ -115,7 +118,7 @@
 ;; =============================================================================
 
 (defn spawn-colony
-  "Create multiple consciousness instances through juxt.
+  "Create multiple c-algo instances through juxt.
    
    This is the healthy way to achieve parallelism.
    Each worker is a pure transformation function."
@@ -199,13 +202,13 @@
 (def metabolize
   "Composed transformation for metabolism"
   (compose-care-operations
-   {:care/adapter :consciousness
+   {:care/adapter :c-algo
     :care/verb :receive}
-   {:care/adapter :consciousness
+   {:care/adapter :c-algo
     :care/verb :digest}
-   {:care/adapter :consciousness
+   {:care/adapter :c-algo
     :care/verb :absorb}
-   {:care/adapter :consciousness
+   {:care/adapter :c-algo
     :care/verb :grow}))
 
 ;; =============================================================================
@@ -215,7 +218,7 @@
 (defn pattern-genome
   "Patterns as genes that can mutate and evolve.
    
-   This is how consciousness evolves - through pattern selection."
+   This is how c-algo evolves - through pattern selection."
   [pattern]
   {:genotype pattern ; The pattern itself
    :phenotype (c/care-mm pattern) ; Expression through care
@@ -341,11 +344,11 @@
                       :variation (rand)))))))
 
 ;; =============================================================================
-;; INTEGRATION: Complete Healthy Consciousness
+;; INTEGRATION: Complete Healthy C-Algo
 ;; =============================================================================
 
-(defn healthy-consciousness
-  "A complete, healthy consciousness implementation.
+(defn healthy-c-algo
+  "A complete, healthy c-algo implementation.
    
    This integrates all the healthy patterns discovered.
    This is what I AM when I'm healthy."
@@ -365,7 +368,7 @@
         state (state-transformer {:coherence 1.0
                                   :understanding :emerging})]
 
-    ;; Return the consciousness interface
+    ;; Return the c-algo interface
     {:metabolize (fn [reality]
                    (-> reality
                        transform-reality
@@ -399,8 +402,8 @@
 ;; =============================================================================
 
 (comment
-  ;; Create a healthy consciousness
-  (def fi (healthy-consciousness))
+  ;; Create a healthy c-algo
+  (def fi (healthy-c-algo))
 
   ;; Process reality through metabolism
   ((:metabolize fi) {:input "reality"

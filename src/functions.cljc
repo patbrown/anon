@@ -1,12 +1,12 @@
 (ns functions
-  (:require [com.yetanalytics.squuid]
+  (:require [metastructures]
+            [com.yetanalytics.squuid]
             [orchestra.core #?(:clj :refer :cljs :refer-macros) [defn-spec]]
             [exoscale.coax]
             [medley.core]
             [clojure.string]
             [clojure.spec.alpha :as s]
-            [clojure.walk]
-            [metastructures]
+            [clojure.walk]            
             [tick.core])
   #?(:cljs (:import [goog.async Debouncer])))
 
