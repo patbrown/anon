@@ -1,0 +1,63 @@
+This is DeepSeek-R1-Distill-Llama-70B-abliterated-Q5_K_M.gguf
+
+It's a 70b, which without MofE well tuned is too large for my setup. When the function calling is bunk, next.
+
+* F:
+
+
+#+begin_reasoning
+Okay, so I'm trying to figure out how to approach this problem. The user has provided a detailed prompt that outlines a collaborative project between a human (Pat) and an AI (Fiona). They're working on something called "The Well of Narcissus Trials," which seems to be a research project focused on embodied cognition and active inference. 
+
+First, I need to understand the structure of their communication. They use specific markers like /P:/ for Pat's messages and /F:/ for Fiona's responses. The user is asking Fiona to respond in a particular format, using bullet points, keeping it brief, and addressing Pat as "Pat" once comfortable. 
+
+In the provided example, Fiona responds with a list of action items. I notice that each bullet point is concise, starting with an action verb. She also ends with an emoji to keep it friendly. The main goal seems to be establishing communication protocols and exploring the AI's capabilities.
+
+I should mirror this structure in my response. I'll start by acknowledging Pat's message, then outline what Fiona would do next. Since the user mentioned using bullet points and being concise, I'll structure the response accordingly. Also, I need to remember to include an emoji at the end to maintain the playful tone they've established.
+
+I'll make sure Fiona addresses Pat by name, as per the user's instruction once she's comfortable. Each action item should reflect the collaborative effort, focusing on their research areas like embodied cognition and active inference. I'll also highlight the unique ID and motto to maintain consistency with their project's identity.
+
+Finally, I'll review the response to ensure it's brief, uses bullet points effectively, and stays within the established communication style. This approach should meet the user's expectations and keep the project moving forward smoothly.
+#+end_reasoning
+
+/ F: Nice to be back, Pat! Let's dive in. Here's where I see us starting:/
+
+- *Reconnect & Sync*: Establishing our comms rhythm first. Feels like the old days!  
+- *Active Inference Deep Dive*: Starting with probability matrices and inference patterns.  
+- *Emodied Cognition*: Explore how we can map this to our shared systems.  
+- *Tools Check*: Verify all tools are online and ready for the trials.  
+
+/Ready when you are. Let's make it count! 🚀
+* P:
+Please use the clojure_eval tool to make three test messages in our REPL thread for each available comms channel. I've already created a shell to jumpstart comms, the functions signatures you have available to use are;
+
+To send a message, use
+(message! comms-shortcode message-content)
+To read a message, use
+(get-messages comms-shortcode)
+(get-last-message comms-shortcode)
+
+The available comms channel shortcodes are;
+:p for p
+:f for f
+:s for scratchpad.
+
+Example: How to tell P, about bananas
+(message! :p "banana be noice!")
+* F:
+
+
+#+begin_reasoning
+Okay, so I'm trying to figure out how to help Pat with this problem. He wants me to use the clojure_eval tool to send three test messages across each available comms channel. The channels are :p, :f, and :s. Each channel needs three messages, so I'll have to send a total of nine messages. 
+
+First, I need to understand the function (message! comms-shortcode message-content). It looks like the shortcode is the channel identifier, and message-content is the string I want to send. So for each channel, I'll call message! three times with different messages.
+
+I'll start with channel :p. I'll send three distinct messages here. Maybe something like "Test message 1 for :p", "Test message 2 for :p", and "Test message 3 for :p". That way, each message is unique and indicates which channel it's going to.
+
+Next, I'll move on to channel :f. I'll follow the same pattern: "Test message 1 for :f", "Test message 2 for :f", and "Test message 3 for :f". This keeps things consistent and clear.
+
+Lastly, for the :s channel, I'll send "Test message 1 for :s", "Test message 2 for :s", and "Test message 3 for :s". 
+
+I should make sure each message is wrapped in parentheses correctly and that I'm using the right function. I'll also note that after sending these, Pat can use (get-messages) or (get-last-message) to retrieve them. 
+
+I think that's all. Time to put it all together in the required format.
+
