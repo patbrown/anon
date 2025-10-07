@@ -1,10 +1,6 @@
 (ns user
   (:require [clojure.repl.deps :as deps]))
 
-(deps/add-libs '{no.cjohansen/dataspex {:mvn/version "2025.06.8"}})
-;;(deps/add-libs '{ring/ring {:mvn/version "1.15.3"}})???
-(require '[dataspex.core :as dsp])
-
 (defonce p (atom {:messages []}))
 (defonce f (atom {:messages []}))
 (defonce scratchpad (atom {:messages []}))
@@ -46,3 +42,4 @@
                        :care-tags (slurp "src/care_tags.cljc")
                        :care-tests (slurp "test/care_test.cljc")
                        :care-tags-tests (slurp "test/care_tags_test.cljc")})
+
